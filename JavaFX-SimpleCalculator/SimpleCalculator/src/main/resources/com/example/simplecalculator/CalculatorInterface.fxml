@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.simplecalculator.CalculatorInterface">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.simplecalculator.CalculatorInterface">
    <children>
       <Pane layoutX="32.0" layoutY="243.0">
          <children>
@@ -88,11 +88,21 @@
             <Button layoutY="241.0" mnemonicParsing="false" onAction="#calculate" prefHeight="26.0" prefWidth="386.0" text="CALCULATE" />
          </children>
       </Pane>
-      <Label fx:id="mainDisplay" layoutX="32.0" layoutY="77.0" prefHeight="72.0" prefWidth="386.0">
+      <Label fx:id="mainDisplay" layoutX="31.0" layoutY="51.0" prefHeight="72.0" prefWidth="386.0">
          <font>
             <Font size="26.0" />
          </font>
       </Label>
       <Button layoutX="32.0" layoutY="200.0" mnemonicParsing="false" onAction="#clear" prefHeight="26.0" prefWidth="386.0" text="RESET" />
+      <Label fx:id="resultDisplay" layoutX="31.0" layoutY="134.0" prefHeight="46.0" prefWidth="310.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
+      <Label fx:id="operatorDisplay" layoutX="353.0" layoutY="134.0" prefHeight="46.0" prefWidth="65.0">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

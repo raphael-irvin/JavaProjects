@@ -9,6 +9,10 @@ public class CalculatorInterface {
 
     @FXML
     Label mainDisplay;
+    @FXML
+    Label resultDisplay;
+    @FXML
+    Label operatorDisplay;
 
     private String currentOperator = "";
     private double currentResult;
@@ -32,9 +36,11 @@ public class CalculatorInterface {
 
         if (!newInput) {
             calculateIntermediate();
+            mainDisplay.setText("");
         }
 
         currentOperator = operator;
+        operatorDisplay.setText(operator);
         newInput = true;
     }
 
@@ -49,6 +55,7 @@ public class CalculatorInterface {
         currentResult = 0;
         currentOperator = "";
         mainDisplay.setText("");
+        resultDisplay.setText("");
         newInput = true;
     }
 
@@ -73,6 +80,7 @@ public class CalculatorInterface {
                 break;
         }
 
-        mainDisplay.setText(String.valueOf(currentResult));
+        resultDisplay.setText(String.valueOf(currentResult));
+        operatorDisplay.setText("");
     }
 }
