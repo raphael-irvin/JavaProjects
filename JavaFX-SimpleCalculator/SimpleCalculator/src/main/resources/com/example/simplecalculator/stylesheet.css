@@ -1,0 +1,17 @@
+.root {
+    -fx-background-color: #161616;
+}
+
+.button {
+    -fx-background-color: #414141;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+}
+
+#mainDisplay {
+    -fx-background-color: #595959;
+    -fx-border-color: #ffffff;
+    -fx-border-width: 2;
+    -fx-text-fill: white;
+}
