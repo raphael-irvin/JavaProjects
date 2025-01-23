@@ -19,8 +19,7 @@ public class CalculatorInterface {
     private boolean newInput = true;
 
     public void handleNumber(ActionEvent event) {
-        Button numberButtonPressed = (Button)event.getSource();
-        String number = numberButtonPressed.getText();
+        String number = ((Button)event.getSource()).getText();
 
         if (newInput) {
             mainDisplay.setText(number);
@@ -31,8 +30,7 @@ public class CalculatorInterface {
     }
 
     public void handleOperator(ActionEvent event) {
-        Button operatorButtonPressed = (Button)event.getSource();
-        String operator = operatorButtonPressed.getText();
+        String operator = ((Button)event.getSource()).getText();
 
         if (!newInput) {
             calculateIntermediate();
