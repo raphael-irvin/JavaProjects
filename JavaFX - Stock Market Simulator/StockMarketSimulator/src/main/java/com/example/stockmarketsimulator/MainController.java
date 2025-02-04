@@ -9,11 +9,18 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class MainController {
+    private final Random random = new Random();
+
     private ArrayList<XYChart.Data<String, Number>> indexHistory = new ArrayList<>();
 
     private int currentDay = 1;
     private int currentPrice = 0;
     private String currentMarketSentiment;
+    private double currentModifier = 1;
+    private double marketVolatility = 0.1;
+
+    double dailyMovementPercentage;
+    double weeklyPriceMovementPercentage;
 
     private int currentTimeFrame = 7;
 
@@ -30,54 +37,42 @@ public class MainController {
     @FXML
     Label currentPriceLabel;
 
+
     public void initialize() {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         series.setName("Stock Market Index");
-        Random random = new Random();
 
-        currentPrice = (int)(random.nextDouble(0.5, 1)*1000);
+        currentPrice = (int)(random.nextDouble(900,1100));
         for (int i = 0; i<currentTimeFrame; i++) {
-            currentPrice = (int)(currentPrice*random.nextDouble(0.8,1.4));
-            XYChart.Data<String, Number> newData = new XYChart.Data<>("Day " + currentDay++, currentPrice);
-            series.getData().add(newData);
-            registerData(newData);
+            generateMarketChanges(series);
         }
 
         mainChart.getData().add(series);
+        updateMarketData(series);
     }
 
+
     public void nextDay() {
-        Random random = new Random();
         XYChart.Series<String, Number> series = mainChart.getData().getFirst();
 
         //PRICE MOVEMENT SYSTEM
-        currentPrice = (int)(currentPrice*random.nextDouble(0.8, 1.2));
-        XYChart.Data<String, Number> newData = new XYChart.Data<>("Day " + currentDay++, currentPrice);
+        generateMarketChanges(series);
+
 
         //LABELING
-        //Movement Percentage
-        double dailyMovementPercentage = (double) Math.round(((currentPrice / series.getData().getLast().getYValue().doubleValue()) * 100 - 100) * 100) /100;
-        dailyPriceMovementLabel.setText("Price Movement: " + dailyMovementPercentage + "%");
+        //Market Data
+        updateMarketData(series);
 
-        double weeklyPriceMovementPercentage = (double) Math.round(((currentPrice / series.getData().get(1).getYValue().doubleValue())*100 - 100)*100) / 100;
-        weeklyPriceMovementLabel.setText("7-Day Price Movement: " + weeklyPriceMovementPercentage + "%");
-
-        //Market Sentiment
-        marketSentimentLabel.setText("Market Sentiment: Neutral");
-        if (weeklyPriceMovementPercentage <= -10 && weeklyPriceMovementPercentage >= -20) {
-            marketSentimentLabel.setText("Market Sentiment: Fear");
-        } else if (weeklyPriceMovementPercentage < -20) {
-            marketSentimentLabel.setText("Market Sentiment: Selloff");
-        } else if (weeklyPriceMovementPercentage >= 10 && weeklyPriceMovementPercentage <= 20) {
-            marketSentimentLabel.setText("Market Sentiment: Greed");
-        } else if (weeklyPriceMovementPercentage > 20) {
-            marketSentimentLabel.setText("Market Sentiment: FOMO");
-        }
-
-        //Current Price
-        currentPriceLabel.setText("Current Price: " + currentPrice);
 
         //CHARTING
+    }
+
+
+    //MAIN MARKET SYSTEM
+    public void generateMarketChanges(XYChart.Series<String, Number> series) {
+        currentPrice = (int)(currentPrice*random.nextDouble(1-marketVolatility, 1 + marketVolatility)*currentModifier);
+        XYChart.Data<String, Number> newData = new XYChart.Data<>("Day " + currentDay++, currentPrice);
+
         if (series.getData().size() >= currentTimeFrame) {
             series.getData().removeFirst();
         }
@@ -85,6 +80,36 @@ public class MainController {
         registerData(newData);
     }
 
+
+    //UPDATE ALL DATA AND LABELS RELATED TO MARKET
+    public void updateMarketData(XYChart.Series<String, Number> series) {
+        //Update Label
+        currentPriceLabel.setText("Current Price: " + currentPrice);
+
+        //Update Price Changes Percentage
+        dailyMovementPercentage = (double) Math.round(((currentPrice / series.getData().get(series.getData().size() - 2).getYValue().doubleValue()) * 100 - 100) * 100) /100;
+        dailyPriceMovementLabel.setText("Price Movement: " + dailyMovementPercentage + "%");
+
+        weeklyPriceMovementPercentage = (double) Math.round(((currentPrice / series.getData().get(1).getYValue().doubleValue())*100 - 100)*100) / 100;
+        weeklyPriceMovementLabel.setText("7-Day Price Movement: " + weeklyPriceMovementPercentage + "%");
+
+        //Update Market Sentiment
+        if (weeklyPriceMovementPercentage < -20) {
+            currentMarketSentiment = "Selloff";
+        } else if (weeklyPriceMovementPercentage <= -10) {
+            currentMarketSentiment = "Fear";
+        } else if (weeklyPriceMovementPercentage > 20) {
+            currentMarketSentiment = "FOMO";
+        } else if (weeklyPriceMovementPercentage >= 10) {
+            currentMarketSentiment = "Greed";
+        } else {
+            currentMarketSentiment = "Neutral";
+        }
+        marketSentimentLabel.setText("Market Sentiment: " + currentMarketSentiment);
+    }
+
+
+    //ADD DATA TO MAXIMUM HISTORY
     public void registerData(XYChart.Data<String, Number> data) {
         if (indexHistory.size() > timeFrameHistoryLimit) {
             indexHistory.removeFirst();
