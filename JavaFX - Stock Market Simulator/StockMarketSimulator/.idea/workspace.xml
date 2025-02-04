@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d21538a9-df43-4814-bbef-3fccad14a085" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/error_prone_annotations-2.36.0.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/gson-2.12.1.jar" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/stockmarketsimulator/MainController.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/target/classes/com/example/stockmarketsimulator/MainPage.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/stockmarketsimulator/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/stockmarketsimulator/MainController.java" afterDir="false" />
-    </list>
+    <list default="true" id="d21538a9-df43-4814-bbef-3fccad14a085" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -63,7 +56,7 @@
     "Application.Main.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "test",
+    "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
     "project.structure.last.edited": "Libraries",
