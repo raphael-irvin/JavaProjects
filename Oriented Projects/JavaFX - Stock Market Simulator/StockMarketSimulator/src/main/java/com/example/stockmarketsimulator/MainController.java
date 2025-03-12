@@ -58,13 +58,9 @@ public class MainController {
         //PRICE MOVEMENT SYSTEM
         generateMarketChanges(series);
 
-
-        //LABELING
-        //Market Data
+        //MARKET DATA
         updateMarketData(series);
 
-
-        //CHARTING
     }
 
 
